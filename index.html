@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inerday — Your Inner Energy, Every Day</title>
+  <meta name="description" content="AI-powered behavioral self-monitoring. Track what gives you energy, understand your patterns, and grow with Momo, your personal companion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #F4F2EC;
+      color: #1E1E1E;
+      line-height: 1.6;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1E1E1E;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: #88B665; }
+    nav a.nav-link {
+      font-size: 14px;
+      color: #85857F;
+      text-decoration: none;
+      margin-left: 24px;
+      transition: color 0.2s;
+    }
+    nav a.nav-link:hover { color: #1E1E1E; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+    .hero-emoji { font-size: 72px; margin-bottom: 24px; }
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    h1 span { color: #88B665; }
+    .subtitle {
+      font-size: 18px;
+      color: #85857F;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      background: #1E1E1E;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Features */
+    .features {
+      padding: 60px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .feature-card .icon { font-size: 32px; margin-bottom: 12px; }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: #85857F;
+      line-height: 1.5;
+    }
+
+    /* How it works */
+    .how {
+      padding: 40px 0 60px;
+      text-align: center;
+    }
+    .how h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .steps {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .step {
+      flex: 1;
+      max-width: 200px;
+      text-align: center;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: #88B665;
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .step p {
+      font-size: 13px;
+      color: #85857F;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #E5E3DD;
+      padding: 32px 0;
+      text-align: center;
+      color: #85857F;
+      font-size: 13px;
+    }
+    footer a {
+      color: #85857F;
+      text-decoration: none;
+      margin: 0 12px;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #1E1E1E; }
+    .footer-links { margin-bottom: 12px; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 30px; }
+      .subtitle { font-size: 16px; }
+      .features { grid-template-columns: 1fr; }
+      .steps { flex-direction: column; align-items: center; }
+      .hero { padding: 48px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="/" class="logo">iner<span>day</span></a>
+      <div>
+        <a href="/privacy.html" class="nav-link">Privacy</a>
+        <a href="/terms.html" class="nav-link">Terms</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-emoji">🌿</div>
+      <h1>Your inner energy,<br><span>every day</span></h1>
+      <p class="subtitle">
+        Track what gives you energy and what drains it. Get AI-powered insights and grow with Momo, your personal companion.
+      </p>
+      <a href="https://apps.apple.com/app/inerday" class="badge">
+        Coming Soon on iOS
+      </a>
+    </section>
+
+    <section class="features">
+      <div class="feature-card">
+        <div class="icon">📝</div>
+        <h3>Capture Moments</h3>
+        <p>Log activities, thoughts, and feelings throughout the day with text or voice.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Track Energy</h3>
+        <p>Tag each moment as boost, neutral, or drain. Discover your energy patterns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">✨</div>
+        <h3>AI Daily Reports</h3>
+        <p>Get personalized reflections with achievements, gratitude, and tomorrow's plan.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🦊</div>
+        <h3>Meet Momo</h3>
+        <p>Your virtual companion who reflects your energy state and remembers your journey.</p>
+      </div>
+    </section>
+
+    <section class="how">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Log</h4>
+          <p>Record moments as they happen — quick, natural, effortless.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Reflect</h4>
+          <p>AI analyzes your patterns and generates daily insights.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Grow</h4>
+          <p>Understand yourself better and build energy-positive habits.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+      </div>
+      <p>&copy; 2026 Inerday. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
