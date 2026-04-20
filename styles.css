@@ -1,0 +1,133 @@
+/* ============================================================
+   Inerday — shared styles
+   Used by index.html, privacy.html, terms.html
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #F4F2EC;
+  color: #1E1E1E;
+  line-height: 1.6;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Nav ---------- */
+nav {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1E1E1E;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+.logo span { color: #88B665; }
+nav a.nav-link {
+  font-size: 14px;
+  color: #85857F;
+  text-decoration: none;
+  margin-left: 24px;
+  transition: color 0.2s;
+}
+nav a.nav-link:hover { color: #1E1E1E; }
+nav a.nav-link[aria-current="page"] {
+  color: #1E1E1E;
+  font-weight: 600;
+}
+
+/* ---------- Body links (inside .content) ---------- */
+.content a { color: #88B665; }
+.content a:hover { text-decoration: underline; }
+
+/* ---------- Content card (privacy / terms) ---------- */
+.content {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 32px 0 60px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.content h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.content .updated {
+  font-size: 13px;
+  color: #85857F;
+  margin-bottom: 32px;
+}
+.content h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+.content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+.content p {
+  font-size: 15px;
+  color: #4A4A4A;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.content ul,
+.content ol {
+  font-size: 15px;
+  color: #4A4A4A;
+  line-height: 1.7;
+  padding-left: 1.3rem;
+  margin-bottom: 8px;
+}
+.content li { margin: 4px 0; }
+.content code {
+  background: #F4F2EC;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #1E1E1E;
+}
+.callout {
+  background: #F4F2EC;
+  border-left: 3px solid #88B665;
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1E1E1E;
+  line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  border-top: 1px solid #E5E3DD;
+  padding: 32px 0;
+  text-align: center;
+  color: #85857F;
+  font-size: 13px;
+}
+footer a {
+  color: #85857F;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.2s;
+}
+footer a:hover { color: #1E1E1E; }
+.footer-links { margin-bottom: 12px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+  .content { padding: 24px; }
+  .content h1 { font-size: 24px; }
+}
