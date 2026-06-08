@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stories &amp; Film — Inerday</title>
+  <meta name="description" content="Essays, ideas, and films from the team behind Inerday — on energy, self-awareness, and building Momo.">
+  <meta property="og:title" content="Stories & Film — Inerday">
+  <meta property="og:description" content="Essays and films on energy, self-awareness, and building Momo.">
+  <script>
+    (function(){try{
+      var t=localStorage.getItem('iner-theme')||'light';
+      var l=localStorage.getItem('iner-lang')||'en';
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.setAttribute('data-lang',l);
+    }catch(e){}})();
+  </script>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .page-head { padding: 72px 0 8px; }
+    .page-head h1 { margin-bottom: 18px; }
+    .page-head .lead { max-width: 560px; }
+
+    /* Filter tabs */
+    .tabs { display: flex; gap: 10px; margin: 40px 0 8px; flex-wrap: wrap; }
+    .tab-btn { padding: 9px 18px; border-radius: 999px; border: 1.5px solid var(--border); background: var(--card); font: inherit; font-size: 14px; font-weight: 600; color: var(--ink-soft); cursor: pointer; transition: all .2s; }
+    .tab-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .tab-btn.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* Featured */
+    .featured { padding: 32px 0 8px; }
+    .feat-card { display: grid; grid-template-columns: 1.2fr 1fr; background: var(--navy); border-radius: var(--radius); overflow: hidden; color: var(--ink-white); box-shadow: var(--shadow-lg); }
+    .feat-media { aspect-ratio: 16/10; background: linear-gradient(135deg, var(--navy), var(--navy-deep)); display: flex; align-items: center; justify-content: center; position: relative; }
+    .feat-media .play { width: 76px; height: 76px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+    .feat-media .play::after { content: ""; border-left: 22px solid var(--navy); border-top: 13px solid transparent; border-bottom: 13px solid transparent; margin-left: 6px; }
+    .feat-media .badge-soon { position: absolute; top: 16px; left: 16px; font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; background: rgba(244,169,104,0.22); color: var(--gold); }
+    .feat-body { padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+    .feat-body .pill { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; margin-bottom: 16px; background: rgba(244,169,104,0.18); color: var(--gold); }
+    .feat-body h2 { color: #fff; margin-bottom: 14px; }
+    .feat-body p { color: rgba(245,242,234,0.72); font-size: 16px; max-width: 420px; margin-bottom: 22px; }
+    .feat-body .meta { font-size: 13px; color: rgba(245,242,234,0.55); }
+
+    /* Grid */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 16px 0 0; }
+    .card { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .card .thumb { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; }
+    .thumb.article { background: linear-gradient(135deg, var(--green-light), var(--green)); }
+    .thumb.article.alt { background: linear-gradient(135deg, #FFE9CC, var(--momo)); }
+    .thumb.video { background: linear-gradient(135deg, var(--navy), var(--navy-deep)); }
+    .thumb .play { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; }
+    .thumb .play::after { content: ""; border-left: 16px solid var(--navy); border-top: 10px solid transparent; border-bottom: 10px solid transparent; margin-left: 4px; }
+    .card .body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+    .pill { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; margin-bottom: 12px; }
+    .pill.video { background: rgba(232,164,74,0.18); color: #a86a1e; }
+    .pill.article { background: rgba(136,182,101,0.18); color: var(--green-deep); }
+    .card h3 { font-size: 19px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.4px; }
+    .card p { color: var(--ink-soft); font-size: 14px; }
+    .card .meta { margin-top: auto; padding-top: 16px; font-size: 12.5px; color: var(--ink-soft); }
+
+    .coming { opacity: 0.72; }
+    .coming .thumb { filter: grayscale(0.15); }
+
+    /* Newsletter strip */
+    .sub { background: var(--cream-deep); border-radius: var(--radius); padding: 48px; text-align: center; margin: 24px 0; }
+    .sub h2 { margin-bottom: 12px; }
+    .sub p { color: var(--ink-soft); max-width: 440px; margin: 0 auto 24px; }
+
+    @media (max-width: 860px) {
+      .feat-card { grid-template-columns: 1fr; }
+      .feat-body { padding: 32px; }
+      .grid { grid-template-columns: 1fr; }
+      .page-head { padding: 48px 0 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo-mark.png" alt="" class="logo-mark"><span class="logo-word">inerday</span></a> 
+      <nav class="nav-links">
+        <a href="/#features" class="nav-link" data-en="Features" data-zh="功能">Features</a>
+        <a href="/#momo" class="nav-link" data-en="Momo" data-zh="Momo">Momo</a>
+        <a href="/stories.html" class="nav-link" data-en="Stories" data-zh="故事">Stories</a>
+        <span class="nav-ctrls">
+          <button id="langToggle" class="icon-btn" type="button" aria-label="Switch language"><span data-lang-label>中文</span></button>
+          <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle light/dark"><span data-theme-icon>☾</span></button>
+        </span>
+        <a href="/#download" class="btn btn-primary btn-sm" data-en="Get Inerday" data-zh="获取 Inerday">Get Inerday</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HEAD -->
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow" data-en="Stories &amp; film" data-zh="故事与影片">Stories &amp; film</span>
+      <h1 data-en="Ideas on <span class=&quot;accent&quot;>energy.</span>" data-zh="关于<span class=&quot;accent&quot;>能量</span>的思考。">Ideas on <span class="accent">energy.</span></h1>
+      <p class="lead" data-en="Essays, films, and notes from the team behind Inerday — on self-awareness, building Momo, and the quiet practice of paying attention to your days." data-zh="来自 Inerday 团队的随笔、影片与笔记——关于自我觉察、打造 Momo，以及认真留意每一天的安静练习。">Essays, films, and notes from the team behind Inerday — on self-awareness, building Momo, and the quiet practice of paying attention to your days.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-en="All" data-zh="全部">All</button>
+        <button class="tab-btn" data-en="Watch" data-zh="观看">Watch</button>
+        <button class="tab-btn" data-en="Read" data-zh="阅读">Read</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured">
+    <div class="container">
+      <div class="feat-card">
+        <div class="feat-media">
+          <span class="badge-soon" data-en="Coming this week" data-zh="本周上线">Coming this week</span>
+          <div class="play"></div>
+        </div>
+        <div class="feat-body">
+          <span class="pill" data-en="Featured film" data-zh="精选影片">Featured film</span>
+          <h2 data-en="Meet Inerday" data-zh="认识 Inerday">Meet Inerday</h2>
+          <p data-en="A short film on the energy you can finally see — and the companion who grows with you. Premiering this week." data-zh="一部关于「你终于能看见的能量」的短片——以及那个与你一起成长的伙伴。本周首映。">A short film on the energy you can finally see — and the companion who grows with you. Premiering this week.</p>
+          <div class="meta" data-en="Video · ~2 min" data-zh="视频 · 约 2 分钟">Video · ~2 min</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="section-pad" style="padding-top:48px;">
+    <div class="container">
+      <div class="grid">
+
+        <!-- Medium article 1 -->
+        <a href="#" class="card coming">
+          <div class="thumb article"></div>
+          <div class="body">
+            <span class="pill article" data-en="Read" data-zh="阅读">Read</span>
+            <h3 data-en="The case for tracking energy, not productivity" data-zh="为什么该记录能量，而不是效率">The case for tracking energy, not productivity</h3>
+            <p data-en="Why we measure how your days feel — not how much you got done." data-zh="为什么我们衡量的是「你的一天感觉如何」，而不是「你做了多少」。">Why we measure how your days feel — not how much you got done.</p>
+            <div class="meta" data-en="Medium · Coming this week" data-zh="Medium · 本周上线">Medium · Coming this week</div>
+          </div>
+        </a>
+
+        <!-- Medium article 2 -->
+        <a href="#" class="card coming">
+          <div class="thumb article alt"></div>
+          <div class="body">
+            <span class="pill article" data-en="Read" data-zh="阅读">Read</span>
+            <h3 data-en="How Momo remembers your journey" data-zh="Momo 如何记得你的旅程">How Momo remembers your journey</h3>
+            <p data-en="The thinking behind a companion that grows alongside you." data-zh="一个与你共同成长的伙伴，背后的设计思考。">The thinking behind a companion that grows alongside you.</p>
+            <div class="meta" data-en="Medium · Soon" data-zh="Medium · 即将">Medium · Soon</div>
+          </div>
+        </a>
+
+        <!-- Video placeholder -->
+        <a href="#" class="card coming">
+          <div class="thumb video"><div class="play"></div></div>
+          <div class="body">
+            <span class="pill video" data-en="Watch" data-zh="观看">Watch</span>
+            <h3 data-en="Inerday in 60 seconds" data-zh="60 秒看懂 Inerday">Inerday in 60 seconds</h3>
+            <p data-en="A quick tour of capture, reflection, and Momo." data-zh="快速浏览记录、反思与 Momo。">A quick tour of capture, reflection, and Momo.</p>
+            <div class="meta" data-en="Video · Soon" data-zh="视频 · 即将">Video · Soon</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="container">
+    <div class="sub">
+      <span class="eyebrow" data-en="Stay in the loop" data-zh="保持关注">Stay in the loop</span>
+      <h2 data-en="New stories, now and then." data-zh="新的故事，时不时更新。">New stories, now and then.</h2>
+      <p data-en="We publish on Medium and YouTube. Follow along, or get the next one in your inbox." data-zh="我们在 Medium 和 YouTube 更新。关注我们，或让下一篇直接送达你的邮箱。">We publish on Medium and YouTube. Follow along, or get the next one in your inbox.</p>
+      <div class="hero-cta" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://medium.com/@inerday" class="btn btn-primary" data-en="Follow on Medium" data-zh="在 Medium 关注">Follow on Medium</a>
+        <a href="mailto:hello@inerday.com?subject=Subscribe%20to%20Inerday%20stories" class="btn btn-ghost" data-en="Email updates" data-zh="邮件订阅">Email updates</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo.png" alt="Inerday" class="logo-img"></a>
+          <p class="footer-tag" data-en="Your inner energy, every day. Track it, understand it, and grow with Momo." data-zh="你的内在能量，每一天。记录它、理解它，并与 Momo 一起成长。">Your inner energy, every day. Track it, understand it, and grow with Momo.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Product" data-zh="产品">Product</h4>
+          <a href="/#features" data-en="Features" data-zh="功能">Features</a>
+          <a href="/#momo" data-en="Meet Momo" data-zh="认识 Momo">Meet Momo</a>
+          <a href="https://app.inerday.com" data-en="Web app" data-zh="网页版">Web app</a>
+          <a href="https://apps.apple.com/us/app/inerday/id6762293197" data-en="iOS app" data-zh="iOS 版">iOS app</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Stories" data-zh="故事">Stories</h4>
+          <a href="/stories.html" data-en="All stories" data-zh="全部故事">All stories</a>
+          <a href="https://medium.com/@inerday" data-en="Medium" data-zh="Medium">Medium</a>
+          <a href="/stories.html" data-en="Film" data-zh="影片">Film</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Company" data-zh="公司">Company</h4>
+          <a href="/privacy.html" data-en="Privacy" data-zh="隐私">Privacy</a>
+          <a href="/terms.html" data-en="Terms" data-zh="条款">Terms</a>
+          <a href="mailto:hello@inerday.com" data-en="Contact" data-zh="联系我们">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-en="&copy; 2026 Inerday. All rights reserved." data-zh="© 2026 Inerday. 保留所有权利。">&copy; 2026 Inerday. All rights reserved.</span>
+        <span data-en="Made with care for your energy." data-zh="为你的能量用心打造。">Made with care for your energy.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+</body>
+</html>

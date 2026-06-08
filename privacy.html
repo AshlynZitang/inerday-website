@@ -1,138 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Inerday</title>
+  <script>
+    (function(){try{
+      var t=localStorage.getItem('iner-theme')||'light';
+      var l=localStorage.getItem('iner-lang')||'en';
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.setAttribute('data-lang',l);
+    }catch(e){}})();
+  </script>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #F4F2EC;
-      color: #1E1E1E;
-      line-height: 1.6;
-    }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
-    nav {
-      padding: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: #1E1E1E;
-      text-decoration: none;
-      letter-spacing: -0.5px;
-    }
-    .logo span { color: #88B665; }
-    nav a.nav-link {
-      font-size: 14px;
-      color: #85857F;
-      text-decoration: none;
-      margin-left: 24px;
-      transition: color 0.2s;
-    }
-    nav a.nav-link:hover { color: #1E1E1E; }
+    .legal { max-width: 760px; margin: 0 auto; padding: 0 24px; }
     .content {
-      background: #fff;
-      border-radius: 20px;
-      padding: 40px;
-      margin: 32px 0 60px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 44px;
+      margin: 40px 0 64px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
     }
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .updated {
-      font-size: 13px;
-      color: #85857F;
-      margin-bottom: 32px;
-    }
-    h2 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 28px;
-      margin-bottom: 8px;
-    }
-    h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-top: 18px;
-      margin-bottom: 6px;
-      color: #1E1E1E;
-    }
-    p {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.7;
-      margin-bottom: 8px;
-    }
-    ul, ol {
-      padding-left: 20px;
-      margin: 6px 0 10px;
-    }
-    li {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.7;
-      margin: 4px 0;
-    }
-    a { color: #88B665; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    .content h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 6px; color: var(--ink); }
+    .updated { font-size: 13px; color: var(--ink-soft); margin-bottom: 32px; }
+    .content h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; margin-top: 30px; margin-bottom: 8px; color: var(--ink); }
+    .content h3 { font-size: 15px; font-weight: 700; margin-top: 18px; margin-bottom: 6px; color: var(--ink); }
+    .content p { font-size: 15px; color: var(--ink); opacity: .82; line-height: 1.7; margin-bottom: 8px; }
+    .content ul, .content ol { padding-left: 20px; margin: 6px 0 10px; }
+    .content li { font-size: 15px; color: var(--ink); opacity: .82; line-height: 1.7; margin: 4px 0; }
+    .content a { color: var(--green-deep); text-decoration: none; }
+    .content a:hover { text-decoration: underline; }
     code {
-      background: #F4F2EC;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.9em;
-      color: #1E1E1E;
+      background: var(--cream); padding: 2px 6px; border-radius: 4px;
+      font-size: 0.9em; color: var(--ink);
     }
     .callout {
-      background: #F4F2EC;
-      border-left: 3px solid #88B665;
-      padding: 14px 16px;
-      margin: 14px 0;
-      border-radius: 6px;
-      font-size: 14px;
-      color: #1E1E1E;
+      background: var(--cream); border-left: 3px solid var(--green);
+      padding: 14px 16px; margin: 14px 0; border-radius: 6px;
+      font-size: 14px; color: var(--ink);
     }
-    footer {
-      border-top: 1px solid #E5E3DD;
-      padding: 32px 0;
-      text-align: center;
-      color: #85857F;
-      font-size: 13px;
-    }
-    footer a {
-      color: #85857F;
-      text-decoration: none;
-      margin: 0 12px;
-      transition: color 0.2s;
-    }
-    footer a:hover { color: #1E1E1E; }
-    .footer-links { margin-bottom: 12px; }
-    @media (max-width: 600px) {
-      .content { padding: 24px; }
-      h1 { font-size: 24px; }
-    }
+    @media (max-width: 600px) { .content { padding: 26px; } .content h1 { font-size: 26px; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav>
-      <a href="/" class="logo">iner<span>day</span></a>
-      <div>
-        <a href="/privacy.html" class="nav-link">Privacy</a>
-        <a href="/terms.html" class="nav-link">Terms</a>
-      </div>
-    </nav>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo-mark.png" alt="" class="logo-mark"><span class="logo-word">inerday</span></a> 
+      <nav class="nav-links">
+        <a href="/#features" class="nav-link" data-en="Features" data-zh="功能">Features</a>
+        <a href="/#momo" class="nav-link" data-en="Momo" data-zh="Momo">Momo</a>
+        <a href="/stories.html" class="nav-link" data-en="Stories" data-zh="故事">Stories</a>
+        <span class="nav-ctrls">
+          <button id="langToggle" class="icon-btn" type="button" aria-label="Switch language"><span data-lang-label>中文</span></button>
+          <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle light/dark"><span data-theme-icon>☾</span></button>
+        </span>
+        <a href="/#download" class="btn btn-primary btn-sm" data-en="Get Inerday" data-zh="获取 Inerday">Get Inerday</a>
+      </nav>
+    </div>
+  </header>
 
+  <div class="legal">
     <div class="content">
       <h1>Privacy Policy</h1>
       <p class="updated">Last Updated: April 17, 2026</p>
@@ -249,14 +183,40 @@
     </div>
   </div>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo.png" alt="Inerday" class="logo-img"></a>
+          <p class="footer-tag">Your inner energy, every day. Track it, understand it, and grow with Momo.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Product" data-zh="产品">Product</h4>
+          <a href="/#features" data-en="Features" data-zh="功能">Features</a>
+          <a href="/#momo" data-en="Meet Momo" data-zh="认识 Momo">Meet Momo</a>
+          <a href="https://app.inerday.com" data-en="Web app" data-zh="网页版">Web app</a>
+          <a href="https://apps.apple.com/us/app/inerday/id6762293197" data-en="iOS app" data-zh="iOS 版">iOS app</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Stories" data-zh="故事">Stories</h4>
+          <a href="/stories.html" data-en="All stories" data-zh="全部故事">All stories</a>
+          <a href="https://medium.com/@inerday" data-en="Medium" data-zh="Medium">Medium</a>
+          <a href="/stories.html" data-en="Film" data-zh="影片">Film</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Company" data-zh="公司">Company</h4>
+          <a href="/privacy.html" data-en="Privacy" data-zh="隐私">Privacy</a>
+          <a href="/terms.html" data-en="Terms" data-zh="条款">Terms</a>
+          <a href="mailto:hello@inerday.com" data-en="Contact" data-zh="联系我们">Contact</a>
+        </div>
       </div>
-      <p>&copy; 2026 Inerday. All rights reserved.</p>
+      <div class="footer-bottom">
+        <span data-en="&copy; 2026 Inerday. All rights reserved." data-zh="© 2026 Inerday. 保留所有权利。">&copy; 2026 Inerday. All rights reserved.</span>
+        <span data-en="Made with care for your energy." data-zh="为你的能量用心打造。">Made with care for your energy.</span>
+      </div>
     </div>
   </footer>
+
+  <script src="/assets/site.js"></script>
 </body>
 </html>

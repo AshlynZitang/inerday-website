@@ -1,266 +1,523 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inerday — Your Inner Energy, Every Day</title>
-  <meta name="description" content="AI-powered behavioral self-monitoring. Track what gives you energy, understand your patterns, and grow with Momo, your personal companion.">
+  <title>Inerday — Your inner energy, every day</title>
+  <meta name="description" content="Inerday turns scattered moments into clarity. Capture your day by the hour, track energy not mood, get an AI report written for you, and grow alongside Momo — a companion who remembers.">
+  <meta property="og:title" content="Inerday — Your inner energy, every day">
+  <meta property="og:description" content="Capture by the hour, track energy, get an AI report written for you, and grow with Momo.">
+  <meta property="og:type" content="website">
+  <script>
+    /* Set theme + language before paint to avoid a flash. */
+    (function(){try{
+      var t=localStorage.getItem('iner-theme')||'light';
+      var l=localStorage.getItem('iner-lang')||'en';
+      document.documentElement.setAttribute('data-theme',t);
+      document.documentElement.setAttribute('data-lang',l);
+    }catch(e){}})();
+  </script>
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #F4F2EC;
-      color: #1E1E1E;
-      line-height: 1.6;
+    /* ---------- Hero ---------- */
+    .hero { padding: 72px 0 40px; overflow: hidden; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;
     }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .hero-copy h1 { margin-bottom: 22px; }
+    .hero-copy .lead { max-width: 480px; margin-bottom: 32px; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .hero-note { font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+    .hero-note a { color: var(--green-deep); text-decoration: none; font-weight: 600; }
 
-    /* Nav */
-    nav {
-      padding: 20px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ---------- Phone mockup (always shows the app in its light look) ---------- */
+    .phone-wrap { display: flex; justify-content: center; position: relative; }
+    .phone-wrap::before {
+      content: ""; position: absolute; width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(136,182,101,0.30), transparent 68%);
+      filter: blur(20px); z-index: 0;
     }
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: #1E1E1E;
-      text-decoration: none;
-      letter-spacing: -0.5px;
+    .phone {
+      position: relative; z-index: 1;
+      width: 300px; background: #fff; border-radius: 42px;
+      padding: 12px; box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
     }
-    .logo span { color: #88B665; }
-    nav a.nav-link {
-      font-size: 14px;
-      color: #85857F;
-      text-decoration: none;
-      margin-left: 24px;
-      transition: color 0.2s;
+    .phone-screen {
+      background: #F4F2EC; border-radius: 32px; padding: 22px 18px 26px;
+      min-height: 560px;
     }
-    nav a.nav-link:hover { color: #1E1E1E; }
+    .ps-greet { font-size: 13px; color: #85857F; }
+    .ps-date { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin: 2px 0 18px; color: #1E1E1E; }
+    .ps-bar-label { font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 8px; }
+    .phone-screen .ps-bar-label { color: #85857F; }
+    .ps-bar { height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--drain), var(--neutral), var(--boost)); margin-bottom: 22px; }
+    .entry { background: #fff; border-radius: 16px; padding: 13px 14px; margin-bottom: 10px; display: flex; gap: 11px; align-items: flex-start; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .entry .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 6px; flex: none; }
+    .dot.boost { background: var(--boost); }
+    .dot.neutral { background: var(--neutral); }
+    .dot.drain { background: var(--drain); }
+    .entry .e-time { font-size: 11px; color: #85857F; }
+    .entry .e-text { font-size: 13.5px; font-weight: 500; line-height: 1.35; color: #1E1E1E; }
+    .ps-momo { margin-top: 16px; display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #FFF4E2, #FFE9CC); border-radius: 16px; padding: 12px 14px; }
+    .ps-momo .face { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--momo-glow), var(--momo)); flex:none; box-shadow: 0 0 14px rgba(244,169,104,0.6); }
+    .ps-momo .m-text { font-size: 12.5px; font-weight: 600; color: #8a5a1e; }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 80px 0 60px;
-    }
-    .hero-emoji { font-size: 72px; margin-bottom: 24px; }
-    h1 {
-      font-size: 42px;
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-    h1 span { color: #88B665; }
-    .subtitle {
-      font-size: 18px;
-      color: #85857F;
-      max-width: 480px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
-    }
-    .badge {
-      display: inline-block;
-      background: #1E1E1E;
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-size: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .badge:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    }
-    .web-link {
-      margin-top: 18px;
-      font-size: 14px;
-    }
-    .web-link a {
-      color: #85857F;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .web-link a:hover { color: #88B665; }
+    /* ---------- Trust strip ---------- */
+    .strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--cream-deep); }
+    .strip-inner { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 24px; padding: 28px 0; text-align: center; }
+    .strip-item .num { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+    .strip-item .lbl { font-size: 12.5px; color: var(--ink-soft); }
 
-    /* Features */
-    .features {
-      padding: 60px 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .feature-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-    .feature-card .icon { font-size: 32px; margin-bottom: 12px; }
-    .feature-card h3 {
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: #85857F;
-      line-height: 1.5;
-    }
+    /* ---------- Feature rows ---------- */
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding: 64px 0; }
+    .frow.flip .fr-visual { order: 2; }
+    .fr-copy h2 { margin-bottom: 16px; }
+    .fr-copy p { color: var(--ink-soft); font-size: 17px; max-width: 460px; }
+    .fr-copy p em { font-style: italic; color: var(--ink); font-weight: 600; }
+    .fr-list { list-style: none; margin-top: 22px; }
+    .fr-list li { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; font-size: 15px; font-weight: 500; }
+    .fr-list li::before { content: "✦"; color: var(--green); font-size: 14px; margin-top: 2px; }
 
-    /* How it works */
-    .how {
-      padding: 40px 0 60px;
-      text-align: center;
+    .fr-visual { display: flex; justify-content: center; }
+    .vcard {
+      width: 100%; max-width: 420px; border-radius: var(--radius);
+      padding: 28px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); background: var(--card);
     }
-    .how h2 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 32px;
-    }
-    .steps {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-    }
-    .step {
-      flex: 1;
-      max-width: 200px;
-      text-align: center;
-    }
-    .step-num {
-      width: 36px;
-      height: 36px;
-      background: #88B665;
-      color: #fff;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 12px;
-    }
-    .step h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .step p {
-      font-size: 13px;
-      color: #85857F;
-      line-height: 1.5;
-    }
+    .vcard-label { font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 14px; }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid #E5E3DD;
-      padding: 32px 0;
-      text-align: center;
-      color: #85857F;
-      font-size: 13px;
-    }
-    footer a {
-      color: #85857F;
-      text-decoration: none;
-      margin: 0 12px;
-      transition: color 0.2s;
-    }
-    footer a:hover { color: #1E1E1E; }
-    .footer-links { margin-bottom: 12px; }
+    /* energy tags visual */
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag { padding: 9px 15px; border-radius: 999px; font-size: 14px; font-weight: 600; }
+    .tag.boost { background: rgba(127,174,138,0.16); color: #3f7556; }
+    .tag.neutral { background: rgba(175,198,221,0.20); color: #486583; }
+    .tag.drain { background: rgba(201,114,114,0.16); color: #9c4747; }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 30px; }
-      .subtitle { font-size: 16px; }
-      .features { grid-template-columns: 1fr; }
-      .steps { flex-direction: column; align-items: center; }
-      .hero { padding: 48px 0 40px; }
+    /* capture compose visual */
+    .compose .bar-track { position: relative; height: 12px; border-radius: 999px; background: linear-gradient(90deg, var(--drain), var(--neutral), var(--boost)); margin: 6px 0 26px; }
+    .compose .knob { position: absolute; top: 50%; left: 70%; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 3px solid var(--boost); transform: translate(-50%,-50%); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .compose .field { display: flex; align-items: center; gap: 10px; background: var(--cream); border-radius: 999px; padding: 12px 16px; font-size: 14px; color: var(--ink-soft); }
+    .compose .field .send { margin-left: auto; width: 28px; height: 28px; border-radius: 50%; background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+    .compose .ins { display: flex; gap: 18px; margin-top: 16px; color: var(--ink-soft); font-size: 13px; font-weight: 600; }
+    .compose .ins span { display: flex; align-items: center; gap: 6px; }
+
+    /* today visual */
+    .tc-week { display: flex; justify-content: space-between; margin-bottom: 18px; }
+    .tc-day { width: 32px; text-align: center; font-size: 12px; color: var(--ink-soft); padding: 6px 0; }
+    .tc-day.on { background: var(--green); color: #fff; border-radius: 9px; font-weight: 700; }
+    .tblock { display: flex; gap: 10px; margin-bottom: 9px; }
+    .tblock .tb-time { font-size: 11px; color: var(--ink-soft); width: 44px; flex: none; padding-top: 9px; }
+    .tblock .tb-body { flex: 1; background: var(--cream); border-radius: 12px; padding: 9px 12px; font-size: 13.5px; font-weight: 500; border-left: 3px solid var(--boost); }
+    .tblock.n .tb-body { border-left-color: var(--neutral); }
+    .tblock.d .tb-body { border-left-color: var(--drain); }
+    .tc-todo { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .tc-todo .tt-label { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+    .tc-row { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 8px; }
+    .tc-check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--green); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; flex: none; }
+    .tc-check.done { background: var(--green); }
+    .tc-row.done span { color: var(--ink-soft); text-decoration: line-through; }
+
+    /* report card */
+    .rep-row { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .rep-row:last-child { border-bottom: none; }
+    .rep-ico { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex: none; background: var(--cream); }
+    .rep-row .t { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-soft); }
+    .rep-row .d { font-size: 14px; font-weight: 500; }
+
+    /* ---------- Momo dark moment ---------- */
+    .momo-night { background: var(--navy); color: var(--ink-white); overflow: hidden; }
+    [data-theme="dark"] .momo-night { background: #111A30; }
+    .momo-night .container { padding-top: 100px; padding-bottom: 100px; }
+    .mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .mn-copy .eyebrow { color: var(--gold); }
+    .mn-copy h2 { color: #fff; margin-bottom: 18px; }
+    .mn-copy h2 .accent-o { color: var(--momo-glow); }
+    .mn-copy p { color: rgba(245,242,234,0.72); font-size: 17px; max-width: 460px; }
+    .momo-chat { margin: 26px 0 6px; display: flex; flex-direction: column; gap: 10px; max-width: 420px; }
+    .mbubble { padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.45; }
+    .mbubble.you { align-self: flex-end; background: rgba(245,242,234,0.10); color: var(--ink-white); border-bottom-right-radius: 4px; }
+    .mbubble.momo { align-self: flex-start; background: linear-gradient(135deg, rgba(244,169,104,0.26), rgba(244,169,104,0.10)); color: #FBE8CF; border-bottom-left-radius: 4px; }
+    .mn-statline { font-size: 13px; color: rgba(245,242,234,0.6); margin-top: 16px; }
+    .mn-statline b { color: var(--gold); font-weight: 700; }
+    .momo-orb-wrap { display: flex; justify-content: center; position: relative; }
+    .momo-orb {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, var(--gold), var(--momo-glow) 45%, var(--momo) 75%);
+      box-shadow: 0 0 90px rgba(244,169,104,0.55), 0 0 140px rgba(244,169,104,0.25);
+      position: relative; z-index: 1;
+    }
+    .star { position: absolute; color: var(--gold); opacity: .85; }
+    .s1 { top: 8%; left: 18%; font-size: 18px; }
+    .s2 { top: 22%; right: 14%; font-size: 26px; }
+    .s3 { bottom: 16%; left: 10%; font-size: 22px; }
+    .s4 { bottom: 24%; right: 20%; font-size: 15px; }
+
+    /* ---------- Goals ladder ---------- */
+    .ladder { width: 100%; max-width: 440px; }
+    .rung { border-radius: 14px; padding: 15px 18px; margin-bottom: 8px; border: 1px solid var(--border); }
+    .rung .rk { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 3px; }
+    .rung .rv { font-size: 15px; font-weight: 600; }
+    .rung.r1 { background: linear-gradient(135deg, rgba(136,182,101,0.18), rgba(136,182,101,0.05)); border-color: rgba(136,182,101,0.30); }
+    .rung.r2 { margin-left: 22px; background: var(--card); }
+    .rung.r3 { margin-left: 44px; background: var(--card); }
+    .rung.r4 { margin-left: 66px; background: rgba(232,164,74,0.12); border-color: rgba(232,164,74,0.3); }
+    .rung.r4 .rk { color: #a86a1e; }
+
+    /* ---------- Stories preview ---------- */
+    .stories { background: var(--cream-deep); }
+    .stories-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
+    .stories-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+    .scard { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+    .scard:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .scard .thumb { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; }
+    .thumb.video { background: linear-gradient(135deg, var(--navy), var(--navy-deep)); }
+    .thumb.article { background: linear-gradient(135deg, var(--green-light), var(--green)); }
+    .play { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.92); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    .play::after { content: ""; border-left: 18px solid var(--navy); border-top: 11px solid transparent; border-bottom: 11px solid transparent; margin-left: 5px; }
+    .scard .body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+    .pill { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; margin-bottom: 12px; }
+    .pill.video { background: rgba(232,164,74,0.18); color: #a86a1e; }
+    .pill.article { background: rgba(136,182,101,0.18); color: var(--green-deep); }
+    .scard h3 { font-size: 20px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.4px; }
+    .scard.small h3 { font-size: 16px; }
+    .scard p { color: var(--ink-soft); font-size: 14px; }
+    .scard .meta { margin-top: auto; padding-top: 14px; font-size: 12.5px; color: var(--ink-soft); }
+    .stories-side { display: flex; flex-direction: column; gap: 24px; }
+
+    /* ---------- Final CTA ---------- */
+    .cta-final { text-align: center; padding: 110px 0; }
+    .cta-final .face-lg { width: 76px; height: 76px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--gold), var(--momo-glow), var(--momo)); margin: 0 auto 26px; box-shadow: 0 0 40px rgba(244,169,104,0.5); }
+    .cta-final h2 { margin-bottom: 18px; }
+    .cta-final .lead { max-width: 480px; margin: 0 auto 32px; }
+
+    @media (max-width: 860px) {
+      .hero-grid, .frow, .frow.flip, .mn-grid, .stories-grid { grid-template-columns: 1fr; gap: 36px; }
+      .frow.flip .fr-visual { order: 0; }
+      .hero { padding: 40px 0 20px; }
+      .fr-visual { order: 2; }
+      .momo-orb-wrap { order: -1; }
+      .rung.r2 { margin-left: 14px; } .rung.r3 { margin-left: 28px; } .rung.r4 { margin-left: 42px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav>
-      <a href="/" class="logo">iner<span>day</span></a>
-      <div>
-        <a href="/privacy.html" class="nav-link">Privacy</a>
-        <a href="/terms.html" class="nav-link">Terms</a>
-      </div>
-    </nav>
 
-    <section class="hero">
-      <div class="hero-emoji">🌿</div>
-      <h1>Your inner energy,<br><span>every day</span></h1>
-      <p class="subtitle">
-        Track what gives you energy and what drains it. Get AI-powered insights and grow with Momo, your personal companion.
-      </p>
-      <a href="https://apps.apple.com/app/inerday" class="badge">
-        Coming Soon on iOS
-      </a>
-      <div class="web-link">
-        <a href="https://app.inerday.com">Try it on the web →</a>
-      </div>
-    </section>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo-mark.png" alt="" class="logo-mark"><span class="logo-word">inerday</span></a> 
+      <nav class="nav-links">
+        <a href="#features" class="nav-link" data-en="Features" data-zh="功能">Features</a>
+        <a href="#momo" class="nav-link" data-en="Momo" data-zh="Momo">宠物</a>
+        <a href="/stories.html" class="nav-link" data-en="Stories" data-zh="故事">Stories</a>
+        <span class="nav-ctrls">
+          <button id="langToggle" class="icon-btn" type="button" aria-label="Switch language"><span data-lang-label>中文</span></button>
+          <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle light/dark"><span data-theme-icon>☾</span></button>
+        </span>
+        <a href="#download" class="btn btn-primary btn-sm" data-en="Get Inerday" data-zh="获取 Inerday">Get Inerday</a>
+      </nav>
+    </div>
+  </header>
 
-    <section class="features">
-      <div class="feature-card">
-        <div class="icon">📝</div>
-        <h3>Capture Moments</h3>
-        <p>Log activities, thoughts, and feelings throughout the day with text or voice.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">⚡</div>
-        <h3>Track Energy</h3>
-        <p>Tag each moment as boost, neutral, or drain. Discover your energy patterns.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">✨</div>
-        <h3>AI Daily Reports</h3>
-        <p>Get personalized reflections with achievements, gratitude, and tomorrow's plan.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🦊</div>
-        <h3>Meet Momo</h3>
-        <p>Your virtual companion who reflects your energy state and remembers your journey.</p>
-      </div>
-    </section>
-
-    <section class="how">
-      <h2>How it works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h4>Log</h4>
-          <p>Record moments as they happen — quick, natural, effortless.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-en="Behavioral self-awareness, made calm" data-zh="建立对自己能量状态的清晰感知">Behavioral self-awareness, made calm</span>
+        <h1 data-en="Your inner energy,<br><span class=&quot;accent&quot;>every day.</span>" data-zh="专注内在能量，<br><span class=&quot;accent&quot;>每一天都更了解自己。</span>">Your inner energy,<br><span class="accent">every day.</span></h1>
+        <p class="lead" data-en="Inerday turns scattered moments into clarity. Capture your day by the hour, see what fuels you and what drains you, get an AI report written for you, and grow alongside Momo — a companion who remembers." data-zh="Inerday 把零散的瞬间变得清晰。按小时记录你的一天，看清什么滋养你、什么消耗你，收到一份为你而写的 AI 报告，并和懂你、记得你的伙伴 Momo 一起成长。">Inerday turns scattered moments into clarity. Capture your day by the hour, see what boosts you and what drains you, get an AI report written for you, and grow alongside Momo, a companion who remembers.</p>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/us/app/inerday/id6762293197" class="btn btn-primary" data-en="Download on iOS" data-zh="下载 iOS 版">Download on iOS</a>
+          <a href="https://app.inerday.com" class="btn btn-ghost" data-en="Try it on the web" data-zh="网页版试用">Try it on the web</a>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h4>Reflect</h4>
-          <p>AI analyzes your patterns and generates daily insights.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h4>Grow</h4>
-          <p>Understand yourself better and build energy-positive habits.</p>
+        <p class="hero-note" data-en="Free to start · Private by design · <a href=&quot;/privacy.html&quot;>Read our privacy promise →</a>" data-zh="免费开始 · 隐私优先 · <a href=&quot;/privacy.html&quot;>阅读我们的隐私承诺 →</a>">Free to start · Private by design · <a href="/privacy.html">Read our privacy promise →</a></p>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-greet" data-en="Good evening, Ash" data-zh="晚上好，Ash">Good evening, Ash</div>
+            <div class="ps-date" data-en="Today" data-zh="今天">Today</div>
+            <div class="ps-bar-label" data-en="Today's energy" data-zh="今日能量">Today's energy</div>
+            <div class="ps-bar"></div>
+            <div class="entry"><span class="dot boost"></span><div><div class="e-time">8:30 AM</div><div class="e-text" data-en="Morning walk before work ☀️" data-zh="上班前散步 ☀️">Morning walk before work ☀️</div></div></div>
+            <div class="entry"><span class="dot drain"></span><div><div class="e-time">2:00 PM</div><div class="e-text" data-en="Back-to-back meetings, no break" data-zh="连轴会议，没休息">Back-to-back meetings, no break</div></div></div>
+            <div class="entry"><span class="dot boost"></span><div><div class="e-time">7:15 PM</div><div class="e-text" data-en="Dinner with an old friend" data-zh="和老朋友吃晚饭">Dinner with an old friend</div></div></div>
+            <div class="ps-momo"><span class="face"></span><span class="m-text" data-en="Momo noticed you light up around people 💛" data-zh="Momo 发现你和人在一起时会发光 💛">Momo noticed you light up around people 💛</span></div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="strip">
+    <div class="container strip-inner">
+      <div class="strip-item"><div class="num" data-en="Hourly" data-zh="每小时">Hourly</div><div class="lbl" data-en="not someday" data-zh="而不是改天">not someday</div></div>
+      <div class="strip-item"><div class="num" data-en="Energy" data-zh="能量">Energy</div><div class="lbl" data-en="not just mood" data-zh="不只是心情">not just mood</div></div>
+      <div class="strip-item"><div class="num" data-en="Day · Week · Month" data-zh="日 · 周 · 月">Day · Week · Month</div><div class="lbl" data-en="AI reflections" data-zh="AI 复盘">AI reflections</div></div>
+      <div class="strip-item"><div class="num" data-en="Private" data-zh="私密">Private</div><div class="lbl" data-en="yours alone" data-zh="只属于你">yours alone</div></div>
+    </div>
   </div>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
+  <!-- FEATURES -->
+  <div id="features"></div>
+  <section class="container">
+
+    <!-- Feature 1: Capture (hourly, not someday) -->
+    <div class="frow">
+      <div class="fr-copy">
+        <span class="eyebrow" data-en="Capture" data-zh="记录">Capture</span>
+        <h2 data-en="Not another journal<br>you'll quit in a week." data-zh="不是又一个<br>你一周后就弃坑的日记。">Not another journal<br>you'll quit in a week.</h2>
+        <p data-en="Daily journals fail because you write once at night, when the day is already a blur. Inerday captures the moment <em>as it happens</em> — in seconds, with whatever's fastest." data-zh="普通日记之所以坚持不下来，是因为你只在睡前写一次，而那时一天早已模糊。Inerday 在<em>当下</em>用几秒钟记录，用最快的方式捕捉。">Daily journals fail because you write once at night, when the day is already a blur. Inerday captures the moment <em>as it happens</em> in seconds, with whatever's fastest.</p>
+        <ul class="fr-list">
+          <li data-en="Drag the energy bar, done in one swipe" data-zh="拖一下能量，一划即可">Drag the energy bar — done in one swipe</li>
+          <li data-en="Type it, like sending a message" data-zh="就像发条消息般记录">Type it, like sending a message</li>
+          <li data-en="Snap a photo, or just speak it out loud" data-zh="拍张照，或直接语音输入">Snap a photo, or just say it</li>
+        </ul>
       </div>
-      <p>&copy; 2026 Inerday. All rights reserved.</p>
+      <div class="fr-visual">
+        <div class="vcard compose">
+          <div class="vcard-label" data-en="How's your feeling right now?" data-zh="你现在的能量如何？">How's your feeling right now?</div>
+          <div class="bar-track"><span class="knob"></span></div>
+          <div class="field">
+            <span data-en="Lunch outside, felt good…" data-zh="出去吃了午饭，感觉不错…">Lunch outside, felt good…</span>
+            <span class="send">↑</span>
+          </div>
+          <div class="ins">
+            <span data-en="⚡ Energy" data-zh="⚡ 能量">⚡ Energy</span>
+            <span data-en="💬 Text" data-zh="💬 文字">💬 Text</span>
+            <span data-en="📷 Photo" data-zh="📷 照片">📷 Photo</span>
+            <span data-en="🎙 Voice" data-zh="🎙 语音">🎙 Voice</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2: Today / Day view -->
+    <div class="frow flip">
+      <div class="fr-visual">
+        <div class="vcard">
+          <div class="tc-week">
+            <span class="tc-day">M</span><span class="tc-day">T</span><span class="tc-day">W</span><span class="tc-day">T</span><span class="tc-day on">F</span><span class="tc-day">S</span><span class="tc-day">S</span>
+          </div>
+          <div class="tblock"><span class="tb-time">8:30</span><span class="tb-body" data-en="Morning walk ☀️" data-zh="晨间散步 ☀️">Morning walk ☀️</span></div>
+          <div class="tblock d"><span class="tb-time">10:00</span><span class="tb-body" data-en="Standup + deep work" data-zh="站会 + 专注工作">Standup + deep work</span></div>
+          <div class="tblock n"><span class="tb-time">1:00</span><span class="tb-body" data-en="Lunch outside" data-zh="出去吃午饭">Lunch outside</span></div>
+          <div class="tc-todo">
+            <div class="tt-label" data-en="Today's to-dos" data-zh="今日待办">Today's to-dos</div>
+            <div class="tc-row done"><span class="tc-check done">✓</span><span data-en="Reply to Mia" data-zh="回复 Mia">Reply to Mia</span></div>
+            <div class="tc-row"><span class="tc-check"></span><span data-en="20-min walk after lunch" data-zh="午饭后散步 20 分钟">20-min walk after lunch</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="fr-copy">
+        <span class="eyebrow" data-en="Today" data-zh="今天">Today</span>
+        <h2 data-en="Your whole day,<br>in one place." data-zh="你的一整天，<br>都在这里。">Your whole day,<br>in one place.</h2>
+        <p data-en="A feed of time blocks shows how today actually went. A calendar lets you look back. A to-do list keeps today moving. Everything points at the day you're living now." data-zh="时间块组成的 feed 还原今天真实的样子，日历让你回看任意一天，待办清单推动今天向前。一切都聚焦在你唯一拥有的今天。">A feed of time blocks shows how today actually went. A calendar lets you look back. A to-do list keeps today moving. Everything points at the day you're living now.</p>
+        <ul class="fr-list">
+          <li data-en="A feed of time blocks, your day as it unfolds" data-zh="时间块, 你的一天如其所是">A feed of time blocks, your day as it unfolds</li>
+          <li data-en="Calendar view to revisit any day" data-zh="日历视图回看任意一天">Calendar view to revisit any day</li>
+          <li data-en="Today's to-dos, always within reach" data-zh="今天的待办随手可及">Today's to-dos, always within reach</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Feature 3: Understand (energy, not mood) -->
+    <div class="frow">
+      <div class="fr-copy">
+        <span class="eyebrow" data-en="Understand" data-zh="理解">Understand</span>
+        <h2 data-en="Track energy,<br>not just <span class=&quot;accent&quot;>mood.</span>" data-zh="追踪能量，<br>而不只是<span class=&quot;accent&quot;>心情。</span>">Track energy,<br>not just <span class="accent">mood.</span></h2>
+        <p data-en="Mood is vague and hard to act on. Energy tells you <em>what to change.</em> Every moment is a gentle boost, neutral, or drain. No judgment, just patterns you can actually use." data-zh="心情太模糊，也难以行动。能量告诉你<em>该改变什么</em>。每个瞬间只是温和的充电、中性或消耗。没有评判，只有你真的用得上的规律。">Mood is vague and hard to act on. Energy tells you <em>what to change.</em> Every moment is a gentle boost, neutral, or drain. No judgment, just patterns you can really use.</p>
+        <ul class="fr-list">
+          <li data-en="Energy is behavioral, you can change your inputs" data-zh="能量是行为性的, 你能改变自己的输入">Energy is behavioral, you can change your inputs</li>
+          <li data-en="Calm, low-saturation colors" data-zh="克制低饱和的配色">Calm, low-saturation colors, never a grade</li>
+          <li data-en="Weekly and monthly trends surface on their own" data-zh="每周每月趋势随之浮现">Weekly and monthly trends surface on their own</li>
+        </ul>
+      </div>
+      <div class="fr-visual">
+        <div class="vcard">
+          <div class="vcard-label" data-en="This week's energy" data-zh="本周能量">This week's energy</div>
+          <div class="ps-bar" style="margin-bottom:8px;"></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-bottom:20px;">
+            <span data-en="Mon" data-zh="一">Mon</span><span data-en="Tue" data-zh="二">Tue</span><span data-en="Wed" data-zh="三">Wed</span><span data-en="Thu" data-zh="四">Thu</span><span data-en="Fri" data-zh="五">Fri</span><span data-en="Sat" data-zh="六">Sat</span><span data-en="Sun" data-zh="日">Sun</span>
+          </div>
+          <div class="entry"><span class="dot boost"></span><div><div class="e-text" data-en="Mornings are your best hours" data-zh="早晨是你状态最好的时候">Mornings are your best hours</div><div class="e-time" data-en="Boost · 9 of 12 entries" data-zh="充电 · 12 条中 9 条">Boost · 9 of 12 entries</div></div></div>
+          <div class="entry"><span class="dot drain"></span><div><div class="e-text" data-en="Long meetings cost you the most" data-zh="冗长的会议最消耗你">Long meetings cost you the most</div><div class="e-time" data-en="Drain · recurring pattern" data-zh="消耗 · 反复出现">Drain · recurring pattern</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 4: Reflect (report back to you) -->
+    <div class="frow flip">
+      <div class="fr-visual">
+        <div class="vcard">
+          <div class="vcard-label" data-en="Your Daily Report" data-zh="你的每日报告">Your Daily Report</div>
+          <div class="rep-row"><div class="rep-ico">✨</div><div><div class="t" data-en="Achievement" data-zh="成就">Achievement</div><div class="d" data-en="You protected your morning, even on a full day." data-zh="即使忙碌，你也守住了自己的早晨。">You protected your morning, even on a full day.</div></div></div>
+          <div class="rep-row"><div class="rep-ico">🔁</div><div><div class="t" data-en="Recap" data-zh="复盘">Recap</div><div class="d" data-en="People lifted you; long meetings wore you down." data-zh="人让你充电；冗长的会议消耗了你。">People lifted you; long meetings wore you down.</div></div></div>
+          <div class="rep-row"><div class="rep-ico">🌙</div><div><div class="t" data-en="New perspective" data-zh="新视角">New perspective</div><div class="d" data-en="Busy isn't the same as drained. Let the rest go." data-zh="忙碌不等于被掏空。其余的，放下吧。">Busy isn't the same as drained. Let the rest go.</div></div></div>
+          <div class="rep-row"><div class="rep-ico">🌱</div><div><div class="t" data-en="Tomorrow" data-zh="明天">Tomorrow</div><div class="d" data-en="Block 20 minutes between meetings." data-zh="在会议之间留出 20 分钟。">Block 20 minutes between meetings.</div></div></div>
+        </div>
+      </div>
+      <div class="fr-copy">
+        <span class="eyebrow" data-en="Reflect" data-zh="反思">Reflect</span>
+        <h2 data-en="You report to everyone.<br>Inerday reports <span class=&quot;accent&quot;>back to you.</span>" data-zh="你向所有人汇报。<br>Inerday 终于<span class=&quot;accent&quot;>向你汇报。</span>">You report to everyone.<br>Inerday reports <span class="accent">back to you.</span></h2>
+        <p data-en="Every day you write updates for your team, your boss, your clients. At day's end, Inerday reads your moments and writes one for <em>you</em> , what you achieved, what to release, and one small thing for tomorrow." data-zh="你每天为团队、老板、客户写汇报。一天结束时，Inerday 为<em>你</em>写一份独属于你的报告，今天完成了什么、该放下什么，以及明天可以完成的一件小事。">Every day you write updates for your team, your boss, your clients. At day's end, Inerday reads your moments and writes one for <em>you</em> , what you achieved, what to release, and one small thing for tomorrow.</p>
+        <ul class="fr-list">
+          <li data-en="Daily recap, written for you" data-zh="每日复盘，为你而写">Daily recap, written for you</li>
+          <li data-en="Weekly review to spot the shifts" data-zh="每周回顾，看清变化">Weekly review to spot the shifts</li>
+          <li data-en="Monthly zoom-out on who you're becoming" data-zh="每月趋势，看清你正在成为谁">Monthly zoom-out on who you're becoming</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MOMO NIGHT MOMENT -->
+  <section class="momo-night" id="momo">
+    <div class="container">
+      <div class="mn-grid">
+        <div class="mn-copy">
+          <span class="eyebrow" data-en="Meet Momo" data-zh="认识 Momo">Meet Momo</span>
+          <h2 data-en="A companion who<br>actually <span class=&quot;accent-o&quot;>remembers.</span>" data-zh="一个真正<span class=&quot;accent-o&quot;>记得你</span>的伙伴。">A companion who<br>actually <span class="accent-o">remembers.</span></h2>
+          <p data-en="Momo isn't just there, Momo remembers. It reads your moments, holds your history, and glows brighter as your energy lifts. Ask about your past, see how you've changed, and get advice grounded in your own days." data-zh="Momo不只陪着你，Momo记得所有。它读懂你的记录，记住你的过往，并随你的能量上升而更明亮。问问你的过去，看看你如何改变，得到基于你自己记录的建议。">Momo isn't just there, Momo remembers. It reads your moments, holds your history, and glows brighter as your energy lifts. Ask about your past, see how you've changed, and get advice grounded in your own days.</p>
+          <div class="momo-chat">
+            <div class="mbubble you" data-en="When was I happiest this month?" data-zh="我这个月哪几天最开心？">When was I happiest this month?</div>
+            <div class="mbubble momo" data-en="The three evenings you spent with friends, your energy peaked each time. Worth protecting." data-zh="你和朋友相处的那三个晚上, 每次你的能量都达到了高峰。值得守护。">The three evenings you spent with friends — your energy peaked each time. Worth protecting.</div>
+          </div>
+          <div class="mn-statline" data-en="<b>★ 248</b> stars · <b>Lv. 6</b> Best Friends · <b>31-day</b> streak" data-zh="<b>★ 248</b> 星星 · <b>Lv. 6</b> 最好的朋友 · <b>31 天</b>连续">★ 248 stars · Lv. 6 Best Friends · 31-day streak</div>
+        </div>
+        <div class="momo-orb-wrap">
+          <span class="star s1">✦</span>
+          <span class="star s2">✧</span>
+          <span class="star s3">✦</span>
+          <span class="star s4">✧</span>
+          <div class="momo-orb"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS: become who you want to be -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="frow" style="padding:0;">
+        <div class="fr-copy">
+          <span class="eyebrow" data-en="Your direction" data-zh="你的方向">Your direction</span>
+          <h2 data-en="Become who you want to be, <br><span class=&quot;accent&quot;>one day at a time.</span>" data-zh="成为你想成为的样子, <br><span class=&quot;accent&quot;>每天一小步。</span>">Become who you want to be —<br><span class="accent">one day at a time.</span></h2>
+          <p data-en="Start from the big picture: who you want to become. Inerday turns that into goals, breaks them into milestones, and lands them as today's to-dos. The distance between <em>someday</em> and <em>today</em> gets a little shorter every day." data-zh="从大方向开始：你想成为谁。Inerday 把它变成目标，拆成里程碑，再落成今天的待办。「<em>某一天</em>」和「<em>今天</em>」之间的距离，每天都近一点。">Start from the big picture: who you want to become. Inerday turns that into goals, breaks them into milestones, and lands them as today's to-dos. The distance between <em>someday</em> and <em>today</em> gets a little shorter every day.</p>
+        </div>
+        <div class="fr-visual">
+          <div class="ladder">
+            <div class="rung r1"><div class="rk" data-en="Who I want to be" data-zh="我想成为的样子">Who I want to be</div><div class="rv" data-en="A calmer, more present me" data-zh="更平静、更专注当下的我">A calmer, more present me</div></div>
+            <div class="rung r2"><div class="rk" data-en="Goal" data-zh="目标">Goal</div><div class="rv" data-en="Protect my mornings" data-zh="守住我的早晨">Protect my mornings</div></div>
+            <div class="rung r3"><div class="rk" data-en="Milestone" data-zh="里程碑">Milestone</div><div class="rv" data-en="Wake without my phone, 5 days" data-zh="连续 5 天不碰手机起床">Wake without my phone, 5 days</div></div>
+            <div class="rung r4"><div class="rk" data-en="Today" data-zh="今天">Today</div><div class="rv" data-en="☑ No screens before 9am" data-zh="☑ 早上 9 点前不看屏幕">☑ No screens before 9am</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES PREVIEW -->
+  <section class="stories section-pad">
+    <div class="container">
+      <div class="stories-head">
+        <div>
+          <span class="eyebrow" data-en="Stories &amp; film" data-zh="故事与影片">Stories &amp; film</span>
+          <h2 data-en="Why we built Inerday." data-zh="我们为什么做 Inerday。">Why we built Inerday.</h2>
+        </div>
+        <a href="/stories.html" class="btn btn-ghost btn-sm" data-en="View all stories →" data-zh="查看全部故事 →">View all stories →</a>
+      </div>
+
+      <div class="stories-grid">
+        <!-- Featured video -->
+        <a href="/stories.html" class="scard">
+          <div class="thumb video"><div class="play"></div></div>
+          <div class="body">
+            <span class="pill video" data-en="Watch" data-zh="观看">Watch</span>
+            <h3 data-en="Meet Inerday — the energy you can finally see" data-zh="认识 Inerday，你终于能看见的能量">Meet Inerday — the energy you can finally see</h3>
+            <p data-en="A short film on tracking your inner energy and the companion who grows with you." data-zh="一部关于记录内在能量、以及那个与你共同成长的伙伴的短片。">A short film on tracking your inner energy and the companion who grows with you.</p>
+            <div class="meta" data-en="Coming this week" data-zh="本周上线">Coming this week</div>
+          </div>
+        </a>
+
+        <!-- Side articles -->
+        <div class="stories-side">
+          <a href="/stories.html" class="scard small">
+            <div class="body">
+              <span class="pill article" data-en="Read" data-zh="阅读">Read</span>
+              <h3 data-en="The case for tracking energy, not productivity" data-zh="为什么该记录能量，而不是效率">The case for tracking energy, not productivity</h3>
+              <p data-en="Our founding essay on Medium." data-zh="我们发表在 Medium 的创始随笔。">Our founding essay on Medium.</p>
+              <div class="meta" data-en="Medium · Coming this week" data-zh="Medium · 本周上线">Medium · Coming this week</div>
+            </div>
+          </a>
+          <a href="/stories.html" class="scard small">
+            <div class="body">
+              <span class="pill article" data-en="Read" data-zh="阅读">Read</span>
+              <h3 data-en="How Momo remembers your journey" data-zh="Momo 如何记得你的旅程">How Momo remembers your journey</h3>
+              <p data-en="A look behind the companion." data-zh="走进这个伙伴的背后。">A look behind the companion.</p>
+              <div class="meta" data-en="Medium · Soon" data-zh="Medium · 即将">Medium · Soon</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-final" id="download">
+    <div class="container">
+      <div class="face-lg"></div>
+      <h2 data-en="Start with one moment." data-zh="从一个瞬间开始。">Start with one moment.</h2>
+      <p class="lead" data-en="Your energy is talking. Inerday helps you listen — a little, every day." data-zh="你的能量在说话。Inerday 帮你倾听——每天，一点点。">Your energy is talking. Inerday helps you listen — a little, every day.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a href="https://apps.apple.com/us/app/inerday/id6762293197" class="btn btn-primary" data-en="Download on iOS" data-zh="下载 iOS 版">Download on iOS</a>
+        <a href="https://app.inerday.com" class="btn btn-green" data-en="Open on the web" data-zh="打开网页版">Open on the web</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="logo" aria-label="Inerday"><img src="/assets/logo.png" alt="Inerday" class="logo-img"></a>
+          <p class="footer-tag" data-en="Your inner energy, every day. Track it, understand it, and grow with Momo." data-zh="你的内在能量，每一天。记录它、理解它，并与 Momo 一起成长。">Your inner energy, every day. Track it, understand it, and grow with Momo.</p>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Product" data-zh="产品">Product</h4>
+          <a href="#features" data-en="Features" data-zh="功能">Features</a>
+          <a href="#momo" data-en="Meet Momo" data-zh="认识 Momo">Meet Momo</a>
+          <a href="https://app.inerday.com" data-en="Web app" data-zh="网页版">Web app</a>
+          <a href="https://apps.apple.com/us/app/inerday/id6762293197" data-en="iOS app" data-zh="iOS 版">iOS app</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Stories" data-zh="故事">Stories</h4>
+          <a href="/stories.html" data-en="All stories" data-zh="全部故事">All stories</a>
+          <a href="/stories.html" data-en="Articles" data-zh="文章">Articles</a>
+          <a href="/stories.html" data-en="Film" data-zh="影片">Film</a>
+        </div>
+        <div class="footer-col">
+          <h4 data-en="Company" data-zh="公司">Company</h4>
+          <a href="/privacy.html" data-en="Privacy" data-zh="隐私">Privacy</a>
+          <a href="/terms.html" data-en="Terms" data-zh="条款">Terms</a>
+          <a href="mailto:hello@inerday.com" data-en="Contact" data-zh="联系我们">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-en="&copy; 2026 Inerday. All rights reserved." data-zh="© 2026 Inerday. 保留所有权利。">&copy; 2026 Inerday. All rights reserved.</span>
+        <span data-en="Made with care for your energy." data-zh="为你的能量用心打造。">Made with care for your energy.</span>
+      </div>
     </div>
   </footer>
+
+  <script src="/assets/site.js"></script>
 </body>
 </html>
