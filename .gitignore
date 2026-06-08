@@ -1,0 +1,5 @@
+# gstack session artifacts (browser preview logs)
+.gstack/
+
+# macOS
+.DS_Store
