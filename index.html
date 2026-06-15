@@ -42,6 +42,7 @@
       background: radial-gradient(circle, rgba(136,182,101,0.30), transparent 68%);
       filter: blur(20px); z-index: 0;
     }
+    .hero-shot { position: relative; z-index: 1; width: 100%; max-width: 380px; height: auto; }
     .phone {
       position: relative; z-index: 1;
       width: 300px; background: #fff; border-radius: 42px;
@@ -90,6 +91,7 @@
       padding: 28px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); background: var(--card);
     }
     .vcard-label { font-size: 11px; font-weight: 700; letter-spacing: .8px; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 14px; }
+    .fr-video { width: 100%; max-width: 300px; height: auto; border-radius: 36px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
 
     /* energy tags visual */
     .tags { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -230,7 +232,7 @@
       <div class="hero-copy">
         <span class="eyebrow" data-en="Behavioral self-awareness, made calm" data-zh="建立对自己能量状态的清晰感知">Behavioral self-awareness, made calm</span>
         <h1 data-en="Your inner energy,<br><span class=&quot;accent&quot;>every day.</span>" data-zh="专注内在能量，<br><span class=&quot;accent&quot;>每一天都更了解自己。</span>">Your inner energy,<br><span class="accent">every day.</span></h1>
-        <p class="lead" data-en="Inerday turns scattered moments into clarity. Capture your day by the hour, see what boosts you and what drains you, get an AI report written for you, and grow alongside Momo, a companion who remembers." data-zh="Inerday 把零散的瞬间变得清晰。按小时记录你的一天，看清什么滋养你、什么消耗你，收到一份为你而写的 AI 报告，并和懂你、记得你的伙伴 Momo 一起成长。">Inerday turns scattered moments into clarity. Capture your day by the hour, see what boosts you and what drains you, get an AI report written for you, and grow alongside Momo, a companion who remembers.</p>
+        <p class="lead" data-en="Inerday is an interoception-training and self-awareness tool that lowers the barrier to self-recording as far as it will go. When you have a continuous sense of your own life, happiness and peace come more easily." data-zh="Inerday 是一个内感受训练和自我觉察的工具，旨在把自我记录的门槛降到最低。当你对生活有连续的感知时，你会更容易感到平静和幸福。">Inerday is an interoception-training and self-awareness tool that lowers the barrier to self-recording as far as it will go. When you have a continuous sense of your own life, happiness and peace come more easily.</p>
         <div class="hero-cta">
           <a href="https://apps.apple.com/us/app/inerday/id6762293197" class="btn btn-primary" data-en="Download on iOS" data-zh="下载 iOS 版">Download on iOS</a>
           <a href="https://app.inerday.com" class="btn btn-ghost" data-en="Try it on the web" data-zh="网页版试用">Try it on the web</a>
@@ -239,18 +241,7 @@
       </div>
 
       <div class="phone-wrap">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="ps-greet" data-en="Good evening, Ash" data-zh="晚上好，Ash">Good evening, Ash</div>
-            <div class="ps-date" data-en="Today" data-zh="今天">Today</div>
-            <div class="ps-bar-label" data-en="Today's energy" data-zh="今日能量">Today's energy</div>
-            <div class="ps-bar"></div>
-            <div class="entry"><span class="dot boost"></span><div><div class="e-time">8:30 AM</div><div class="e-text" data-en="Morning walk before work ☀️" data-zh="上班前散步 ☀️">Morning walk before work ☀️</div></div></div>
-            <div class="entry"><span class="dot drain"></span><div><div class="e-time">2:00 PM</div><div class="e-text" data-en="Back-to-back meetings, no break" data-zh="连轴会议，没休息">Back-to-back meetings, no break</div></div></div>
-            <div class="entry"><span class="dot boost"></span><div><div class="e-time">7:15 PM</div><div class="e-text" data-en="Dinner with an old friend" data-zh="和老朋友吃晚饭">Dinner with an old friend</div></div></div>
-            <div class="ps-momo"><span class="face"></span><span class="m-text" data-en="Momo noticed you light up around people 💛" data-zh="Momo 发现你和人在一起时会发光 💛">Momo noticed you light up around people 💛</span></div>
-          </div>
-        </div>
+        <img src="/assets/hero-capture.png" class="hero-shot" alt="Inerday — capture life like texting, one message in two views" width="905" height="1934">
       </div>
     </div>
   </section>
@@ -260,7 +251,7 @@
     <div class="container strip-inner">
       <div class="strip-item"><div class="num" data-en="Hourly" data-zh="每小时">Hourly</div><div class="lbl" data-en="not someday" data-zh="而不是改天">not someday</div></div>
       <div class="strip-item"><div class="num" data-en="Energy" data-zh="能量">Energy</div><div class="lbl" data-en="not just mood" data-zh="不只是心情">not just mood</div></div>
-      <div class="strip-item"><div class="num" data-en="Day · Week · Month" data-zh="日 · 周 · 月">Day · Week · Month</div><div class="lbl" data-en="AI reflections" data-zh="AI 复盘">AI reflections</div></div>
+      <div class="strip-item"><div class="num" data-en="Day · Week" data-zh="日 · 周">Day · Week</div><div class="lbl" data-en="AI reflections" data-zh="AI 复盘">AI reflections</div></div>
       <div class="strip-item"><div class="num" data-en="Private" data-zh="私密">Private</div><div class="lbl" data-en="yours alone" data-zh="只属于你">yours alone</div></div>
     </div>
   </div>
@@ -313,19 +304,9 @@
       </div>
 
       <div class="fr-visual">
-        <div class="vcard">
-          <div class="tc-week">
-            <span class="tc-day">M</span><span class="tc-day">T</span><span class="tc-day">W</span><span class="tc-day">T</span><span class="tc-day on">F</span><span class="tc-day">S</span><span class="tc-day">S</span>
-          </div>
-          <div class="tblock"><span class="tb-time">8:30</span><span class="tb-body" data-en="Morning walk ☀️" data-zh="晨间散步 ☀️">Morning walk ☀️</span></div>
-          <div class="tblock d"><span class="tb-time">10:00</span><span class="tb-body" data-en="Standup + deep work" data-zh="站会 + 专注工作">Standup + deep work</span></div>
-          <div class="tblock n"><span class="tb-time">1:00</span><span class="tb-body" data-en="Lunch outside" data-zh="出去吃午饭">Lunch outside</span></div>
-          <div class="tc-todo">
-            <div class="tt-label" data-en="Today's to-dos" data-zh="今日待办">Today's to-dos</div>
-            <div class="tc-row done"><span class="tc-check done">✓</span><span data-en="Reply to Mia" data-zh="回复 Mia">Reply to Mia</span></div>
-            <div class="tc-row"><span class="tc-check"></span><span data-en="20-min walk after lunch" data-zh="午饭后散步 20 分钟">20-min walk after lunch</span></div>
-          </div>
-        </div>
+        <video class="fr-video" autoplay loop muted playsinline poster="/assets/hero-capture.png" aria-label="Your whole day, in one place">
+          <source src="/assets/hero-capture.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
 
@@ -334,7 +315,7 @@
       <div class="fr-copy">
         <span class="eyebrow" data-en="Understand" data-zh="理解">Understand</span>
         <h2 data-en="Track energy,<br>not just <span class=&quot;accent&quot;>mood.</span>" data-zh="追踪能量，<br>而不只是<span class=&quot;accent&quot;>心情。</span>">Track energy,<br>not just <span class="accent">mood.</span></h2>
-        <p data-en="Mood is vague and hard to act on. Energy tells you <em>what to change.</em> Every moment is a gentle boost, neutral, or drain. No judgment, just patterns you can actually use." data-zh="心情太模糊，也难以行动。能量告诉你<em>该改变什么</em>。每个瞬间只是温和的充电、中性或消耗。没有评判，只有你真的用得上的规律。">Mood is vague and hard to act on. Energy tells you <em>what to change.</em> Every moment is a gentle boost, neutral, or drain. No judgment, just patterns you can really use.</p>
+        <p data-en="Traditional mood is an evaluation; energy is information.<br><br>&quot;Drain&quot; isn't a moral judgment (unlike &quot;lazy&quot; or &quot;wasting time&quot;), it's just an energy fact. It's a verb-like language about flow, and it rewrites the grammar of your inner narrative. When your energy is low, you go do something that recharges you. That single piece of information carries no subjective judgment." data-zh="传统的情绪记录是一种评价，而能量是一种信息。<br><br>低能量只是一个能量事实。它是动词性的、关于流向的语言，它在潜移默化地重塑你内在叙事的语法。当你能量低的时候，就去做充电的事情。这是一个信息，没有任何主观的评判。">Traditional mood is an evaluation; energy is information.<br><br>"Drain" isn't a moral judgment (unlike "lazy" or "wasting time"), it's just an energy fact. It's a verb-like language about flow, and it rewrites the grammar of your inner narrative. When your energy is low, you go do something that recharges you. That single piece of information carries no subjective judgment.</p>
         <ul class="fr-list">
           <li data-en="Energy is behavioral, you can change your inputs" data-zh="能量是行为性的, 你能改变自己的输入">Energy is behavioral, you can change your inputs</li>
           <li data-en="Calm, low-saturation colors" data-zh="克制低饱和的配色">Calm, low-saturation colors, never a grade</li>
@@ -477,7 +458,6 @@
   <!-- FINAL CTA -->
   <section class="cta-final" id="download">
     <div class="container">
-      <div class="face-lg"></div>
       <h2 data-en="Start with one moment." data-zh="从一个瞬间开始。">Start with one moment.</h2>
       <p class="lead" data-en="Your energy is talking. Inerday helps you listen — a little, every day." data-zh="你的能量在说话。Inerday 帮你倾听——每天，一点点。">Your energy is talking. Inerday helps you listen — a little, every day.</p>
       <div class="hero-cta" style="justify-content:center;">
